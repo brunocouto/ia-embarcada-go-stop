@@ -4,7 +4,7 @@ Projeto final da disciplina **IA Embarcada e Modelos Compactos**.
 
 ## Objetivo
 
-Treinar um classificador pequeno para reconhecer as palavras `go` e `stop` em gravações curtas. Depois, converter e comprimir o modelo e executá-lo em um aplicativo Android que lê o microfone virtual do emulador. O celular físico pode ser usado, mas não é exigido pelo enunciado.
+Treinar um classificador pequeno para reconhecer as palavras `go` e `stop` em gravações curtas. Depois, converter e comprimir o modelo e executá-lo em um aplicativo Android que lê o microfone virtual do emulador. O celular físico pode ser usado.
 
 ## Fluxo previsto
 
