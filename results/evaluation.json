@@ -1,0 +1,50 @@
+{
+  "model_file": "models/go_stop_model.keras",
+  "model_bytes": 430922,
+  "input_shape": [
+    1,
+    16000,
+    1
+  ],
+  "labels_in_order": [
+    "go",
+    "stop"
+  ],
+  "test_examples": 205,
+  "accuracy": 0.8780487804878049,
+  "error_count": 25,
+  "confusion_matrix_rows_true_columns_predicted": [
+    [
+      92,
+      17
+    ],
+    [
+      8,
+      88
+    ]
+  ],
+  "per_class": {
+    "go": {
+      "test_examples": 109,
+      "correct": 92,
+      "recall": 0.8440366972477065,
+      "precision": 0.92
+    },
+    "stop": {
+      "test_examples": 96,
+      "correct": 88,
+      "recall": 0.9166666666666666,
+      "precision": 0.8380952380952381
+    }
+  },
+  "seed": 42,
+  "epochs_requested": 25,
+  "epochs_ran": 12,
+  "best_validation_accuracy": 0.8372092843055725,
+  "batch_size": 32,
+  "tensorflow_version": "2.20.0",
+  "numpy_version": "2.4.6",
+  "selected_epoch_by_validation_loss": 7,
+  "validation_accuracy_at_selected_epoch": 0.7813953757286072,
+  "model_parameters": 30338
+}

@@ -1,0 +1,103 @@
+{
+  "test_examples": 205,
+  "labels_in_order": [
+    "go",
+    "stop"
+  ],
+  "keras_model": {
+    "file": "models/go_stop_model.keras",
+    "bytes": 430922,
+    "accuracy": 0.8780487804878049,
+    "correct": 180,
+    "errors": 25,
+    "confusion_matrix_rows_true_columns_predicted": [
+      [
+        92,
+        17
+      ],
+      [
+        8,
+        88
+      ]
+    ]
+  },
+  "float32_tflite": {
+    "file": "models/go_stop_float32.tflite",
+    "bytes": 126768,
+    "interface": {
+      "input_shape": [
+        1,
+        16000,
+        1
+      ],
+      "input_dtype": "float32",
+      "output_shape": [
+        1,
+        2
+      ],
+      "output_dtype": "float32",
+      "tensor_dtypes_present": [
+        "float32",
+        "int32"
+      ]
+    },
+    "accuracy": 0.8780487804878049,
+    "correct": 180,
+    "errors": 25,
+    "confusion_matrix_rows_true_columns_predicted": [
+      [
+        92,
+        17
+      ],
+      [
+        8,
+        88
+      ]
+    ]
+  },
+  "quantized_tflite": {
+    "file": "models/go_stop_quantized.tflite",
+    "bytes": 39824,
+    "interface": {
+      "input_shape": [
+        1,
+        16000,
+        1
+      ],
+      "input_dtype": "float32",
+      "output_shape": [
+        1,
+        2
+      ],
+      "output_dtype": "float32",
+      "tensor_dtypes_present": [
+        "float32",
+        "int32",
+        "int8"
+      ]
+    },
+    "accuracy": 0.8731707317073171,
+    "correct": 179,
+    "errors": 26,
+    "confusion_matrix_rows_true_columns_predicted": [
+      [
+        92,
+        17
+      ],
+      [
+        9,
+        87
+      ]
+    ]
+  },
+  "quantization_method": "post-training dynamic-range; tf.lite.Optimize.DEFAULT sem dataset representativo",
+  "size_reduction_vs_float32_percent": 68.58513189448442,
+  "quantized_accuracy_delta_percentage_points": -0.4878048780487809,
+  "float_vs_keras_prediction_disagreements": 0,
+  "quantized_vs_float_prediction_disagreements": 1,
+  "max_absolute_score_difference_float_vs_keras": 2.384185791015625e-07,
+  "max_absolute_score_difference_quantized_vs_float": 0.043212890625,
+  "selected_for_android": "models/go_stop_quantized.tflite",
+  "selection_rule": "menor que float32 e perda de acurácia no teste <= 2 pontos percentuais",
+  "tensorflow_version": "2.20.0"
+}

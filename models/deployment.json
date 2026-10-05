@@ -1,0 +1,21 @@
+{
+  "model_file": "go_stop_quantized.tflite",
+  "labels_file": "labels.json",
+  "audio_spec_file": "../data/audio_spec.json",
+  "input_shape": [
+    1,
+    16000,
+    1
+  ],
+  "input_dtype": "float32",
+  "output_shape": [
+    1,
+    2
+  ],
+  "output_dtype": "float32",
+  "labels_in_order": [
+    "go",
+    "stop"
+  ],
+  "quantization": "dynamic-range, weights int8; float32 interface"
+}

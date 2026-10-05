@@ -1,0 +1,11 @@
+{
+  "manifest": "data/manifest.csv",
+  "audio_spec": "data/audio_spec.json",
+  "seed": 42,
+  "epochs_requested": 25,
+  "batch_size": 32,
+  "model": "1D CNN sobre áudio PCM normalizado",
+  "optimizer": "Adam, learning_rate=0.001",
+  "early_stopping": "val_loss, patience=5, restore_best_weights=True",
+  "split_policy": "por locutor, fixada na etapa 2"
+}

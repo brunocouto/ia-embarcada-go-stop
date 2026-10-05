@@ -1,0 +1,25 @@
+# Dataset baixado e arquivos extraídos (obtidos pelo script de preparação)
+/data/raw/
+
+# Saídas locais do Android e do Gradle
+**/build/
+**/.gradle/
+**/local.properties
+.idea/
+*.iml
+
+# Ambiente Python
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Configurações locais e chaves
+.env
+.env.*
+*.jks
+*.keystore
+
+# Material recebido para orientar o trabalho, fora do repositório público
+/projeto.txt
+/Descrição do projeto final.pdf

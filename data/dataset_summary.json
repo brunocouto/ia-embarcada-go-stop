@@ -1,0 +1,30 @@
+{
+  "source_url": "https://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip",
+  "source_description": "Mini Speech Commands, conforme tutorial oficial do TensorFlow",
+  "license": "CC BY, conforme tutorial oficial do TensorFlow; verificar atribuição antes da publicação dos áudios",
+  "archive_bytes": 182082353,
+  "archive_sha256": "49650f2341b26d886b46b3f4fb8fed59e30300b17550f1ee4a768b3106cf93a0",
+  "selected_labels": [
+    "go",
+    "stop"
+  ],
+  "split_seed": 42,
+  "split_method": "80/10/10 por speaker_id; mesmo locutor só em uma divisão",
+  "speaker_count": 1070,
+  "sample_count": 2000,
+  "counts": {
+    "train": {
+      "go": 788,
+      "stop": 792
+    },
+    "validation": {
+      "go": 103,
+      "stop": 112
+    },
+    "test": {
+      "go": 109,
+      "stop": 96
+    }
+  },
+  "audio_spec_file": "data/audio_spec.json"
+}
