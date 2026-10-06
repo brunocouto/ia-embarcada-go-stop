@@ -38,7 +38,7 @@ Inicie o emulador Android, instale o APK debug e habilite a opção **Virtual mi
 4. Registre em `results/device_tests.csv` uma linha por tentativa, com `palavra_falada`, `palavra_prevista`, `pontuacao_percentual`, `inferencia_ms` e observações. Crie o arquivo somente ao realizar os testes; não preencha resultados presumidos.
 5. Confira se o fluxo inteiro funciona: permissão → microfone → preparação → inferência → resultado. Anote erros e as condições de gravação. Se possível, filme uma demonstração curta para a entrega final.
 
-As pontuações de `go` e `stop` servem apenas para comparar essas duas classes. O modelo não foi treinado para silêncio, outras palavras ou comandos contínuos; portanto, sempre mostrará uma dessas duas palavras. O tempo na tela mede apenas `Interpreter.run`, não a gravação de um segundo nem a inicialização do modelo.
+As pontuações de `go` e `stop` comparam apenas essas duas classes. Capturas claramente muito baixas (RMS abaixo de `0.004` e pico abaixo de `0.03`) são rejeitadas como ausência de fala; previsões abaixo de `85%` são exibidas como fala incerta. O limite de nível fica abaixo do percentil 5 das amostras de treino. O modelo não foi treinado para reconhecer silêncio, ruído, outras palavras ou comandos contínuos; ruído acima do limite ainda pode receber uma pontuação alta, e erros confiantes podem ocorrer. Para corrigir confusões específicas do microfone ou da voz do aparelho, é necessário avaliar capturas reais e incluir exemplos representativos no treinamento. A tela mostra as duas pontuações e os níveis RMS/pico para ajudar nesse diagnóstico. O tempo informado mede apenas `Interpreter.run`, não a gravação de um segundo nem a inicialização do modelo.
 
 ## Arquivos principais
 
