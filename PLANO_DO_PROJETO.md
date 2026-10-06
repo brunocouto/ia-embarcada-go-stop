@@ -19,11 +19,10 @@
 - **Entrada do aplicativo:** uma gravação de áudio de duração fixa, iniciada pelo usuário.
 - **Saída do aplicativo:** palavra prevista e pontuação de confiança.
 
-Essas são **decisões do projeto**, não exigências adicionais do professor. O enunciado permite dispositivo real ou simulado e cita Android/iOS Mobile entre as opções; portanto, este plano não exige instalar o aplicativo em um celular físico.
-
+Essas são **decisões do projeto**. 
 ## Correspondência com o enunciado
 
-| Exigência do professor | Como será demonstrada |
+| Exigência do projeto | Como será demonstrada |
 | --- | --- |
 | Coleta de dados de sensores | O aplicativo lê o microfone Android no emulador e cria a entrada para inferência. |
 | Treinamento com dataset público ou próprio | O grupo treina um modelo com `go` e `stop` do Mini Speech Commands. |

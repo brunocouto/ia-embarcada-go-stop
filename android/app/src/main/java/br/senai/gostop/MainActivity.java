@@ -39,6 +39,9 @@ public final class MainActivity extends Activity {
     private static final int RECORD_PERMISSION_REQUEST = 10;
     private static final int SAMPLE_RATE = 16_000;
     private static final int SAMPLES_PER_CLIP = 16_000;
+    private static final float MIN_INPUT_RMS = 0.004f;
+    private static final float MIN_INPUT_PEAK = 0.03f;
+    private static final float MIN_CLASS_CONFIDENCE = 0.85f;
 
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
     private Interpreter interpreter;
@@ -228,8 +231,24 @@ public final class MainActivity extends Activity {
 
     private void classify(short[] pcm, String completionStatus) {
         float[][][] input = new float[1][SAMPLES_PER_CLIP][1];
+        double sumSquares = 0.0;
+        int peakPcm = 0;
         for (int index = 0; index < SAMPLES_PER_CLIP; index++) {
-            input[0][index][0] = pcm[index] / 32768.0f;
+            float sample = pcm[index] / 32768.0f;
+            input[0][index][0] = sample;
+            sumSquares += sample * sample;
+            peakPcm = Math.max(peakPcm, Math.abs((int) pcm[index]));
+        }
+        double inputRms = Math.sqrt(sumSquares / SAMPLES_PER_CLIP);
+        float inputPeak = peakPcm / 32768.0f;
+        if (inputRms < MIN_INPUT_RMS && inputPeak < MIN_INPUT_PEAK) {
+            String result = String.format(
+                Locale.getDefault(),
+                "Sem fala detectável\nNível RMS: %.4f | pico: %.3f",
+                inputRms, inputPeak
+            );
+            showResult(result, "Gravação descartada por nível de áudio muito baixo.");
+            return;
         }
         float[][] output = new float[1][labels.length];
         showStatus("Executando inferência no Android...");
@@ -238,10 +257,21 @@ public final class MainActivity extends Activity {
         double inferenceMs = (SystemClock.elapsedRealtimeNanos() - startNanos) / 1_000_000.0;
 
         int selected = output[0][0] >= output[0][1] ? 0 : 1;
+        if (output[0][selected] < MIN_CLASS_CONFIDENCE) {
+            String result = String.format(
+                Locale.getDefault(),
+                "Fala incerta (máx. %.1f%%)\nGO: %.1f%% | STOP: %.1f%%\nNível RMS: %.4f | pico: %.3f",
+                output[0][selected] * 100.0f, output[0][0] * 100.0f,
+                output[0][1] * 100.0f, inputRms, inputPeak
+            );
+            showResult(result, "Pontuação baixa. Repita a gravação dizendo GO ou STOP claramente.");
+            return;
+        }
         String result = String.format(
             Locale.getDefault(),
-            "Resultado: %s (pontuação %.1f%%)\nInferência: %.1f ms",
-            labels[selected].toUpperCase(Locale.ROOT), output[0][selected] * 100.0f, inferenceMs
+            "Resultado: %s (%.1f%%)\nGO: %.1f%% | STOP: %.1f%%\nNível RMS: %.4f | pico: %.3f\nInferência: %.1f ms",
+            labels[selected].toUpperCase(Locale.ROOT), output[0][selected] * 100.0f,
+            output[0][0] * 100.0f, output[0][1] * 100.0f, inputRms, inputPeak, inferenceMs
         );
         showResult(result, completionStatus);
     }
